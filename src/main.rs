@@ -19,9 +19,7 @@ fn main() {
     let step = Uniform::new(0, 4);
     let mut rng = rand::thread_rng();
     let choice = step.sample(&mut rng);
-
     let r = &roots[choice];
-    println!("{}", r);
 
     let factors = bob.factor_n_given_square_roots(&r, &alice.n);
 
@@ -31,6 +29,9 @@ fn main() {
     }
 
     let (f1, f2) = factors.unwrap();
-    assert_eq!(f1 * f2, alice.n);
-    println!("Bob wins");
+    if bob.verify(f1, f2, alice.n).is_ok() {
+        println!("Bob wins");
+    } else {
+        println!("Err");
+    }
 }

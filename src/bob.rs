@@ -2,6 +2,7 @@ use num_bigint::{BigUint, RandomBits};
 use num_integer::Integer;
 use rand::Rng;
 use std::cmp::{max, min};
+use crate::utils::{verify_prime, TossError};
 
 pub struct Bob {
     root: Option<BigUint>,
@@ -39,5 +40,21 @@ impl Bob {
         }
         self.root = Some(x.clone());
         (x.clone(), x.modpow(&BigUint::from(2u32), &n))
+    }
+
+    pub fn verify(&self, f1: BigUint, f2: BigUint, n: BigUint) -> Result<(), TossError> {
+        if verify_prime(f1.clone()).is_err() {
+            return Err(TossError::PrimeError)
+        }
+
+        if verify_prime(f2.clone()).is_err() {
+            return Err(TossError::PrimeError)
+        }
+
+        if f1 * f2 != n {
+            return Err(TossError::WrongFactors)
+        }
+
+        Ok(())
     }
 }
