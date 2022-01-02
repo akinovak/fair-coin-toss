@@ -8,7 +8,6 @@ pub struct Bob {
     root: Option<BigUint>,
 }
 
-//TODO verify
 impl Bob {
     pub fn new() -> Self {
         Bob { 
