@@ -18,7 +18,6 @@ impl Bob {
     pub fn factor_n_given_square_roots(&self, r2: &BigUint, n: &BigUint) -> Option<(BigUint, BigUint)> {
         let r1 = self.root.as_ref().unwrap();
         if r1 == r2 || r1 == &(n - r2) {
-            //alice wins
             return None
         }
 
