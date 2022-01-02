@@ -71,7 +71,7 @@ mod test {
     fn generate_new() {
         let security = 128;
 
-        let sc = Alice::new(security);
+        let _sc = Alice::new(security);
     }
 
     #[test]
